@@ -44,7 +44,7 @@ exports.update = async (req, res) => {
     }
 };
 
-exports.delete = async (req, res) => {
+exports.delete = async (req, res,next) => {
     try {
         const usuario = await usuarioService.delete(req.params.id);
         if (!usuario) {
@@ -54,8 +54,6 @@ exports.delete = async (req, res) => {
         }
         res.status(200).json(usuario);
     } catch (error) {
-        res.status(500).json({
-            mensaje: error.message
-        });
+        next(error);
     }
 };
