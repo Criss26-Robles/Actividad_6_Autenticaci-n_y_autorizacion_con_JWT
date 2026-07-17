@@ -3,7 +3,7 @@ const pool = new Pool({
     host: 'localhost',
     port: 5432,
     user: 'postgres',
-    password: '123456',
+    password: process.env.DB_PASSWORD || '1004807326Ed',
     database: 'biblioteca'
 });
 pool.query('SELECT NOW()', (error, resultado)=>{
