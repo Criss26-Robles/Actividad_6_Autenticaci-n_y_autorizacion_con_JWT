@@ -1,7 +1,8 @@
 require("dotenv").config();
 const express = require("express");
-const logger = require("./middlewares/logger");
+const requestLogger = require("./middlewares/logger");
 const errorHandler = require("./middlewares/errorHandler");
+const logger = require("./utils/logger");
 
 require("./models");
 
@@ -17,7 +18,7 @@ const permisoRoutes = require("./routes/permiso.routes");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(logger.logger);
+app.use(requestLogger);
 
 app.use("/usuarios", usuarioRoutes);
 app.use("/libros", libroRoutes);
@@ -29,5 +30,5 @@ app.use("/permisos", permisoRoutes);
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
+  logger.info(`Servidor ejecutándose en http://localhost:${PORT}`);
 });
